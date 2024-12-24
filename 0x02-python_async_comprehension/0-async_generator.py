@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 """Module for generating random numbers asynchronously."""
 
-from typing import Generator
 import random
+import asyncio
+from typing import AsyncGenerator
 
-def async_generator() -> Generator[float, None, None]:
+
+async def async_generator() -> AsyncGenerator[float, None]:
     """
     Coroutine that yields random numbers between 0 and 10.
+    Yields one number every second for a total of 10 numbers.
     """
     for _ in range(10):
+        await asyncio.sleep(1)
         yield random.uniform(0, 10)
